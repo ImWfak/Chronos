@@ -5,6 +5,7 @@ import {
     LOG_LEVEL
 } from "../configs/server.config.js"
 import express from "express"
+
 const app = express()
 
 //========================================ROUTERS
@@ -13,6 +14,7 @@ const app = express()
 //========================================DATA_BASE
 import {sequelize} from "../api/dbutils/connectDB.js"
 import {makeAssociations} from "../api/dbutils/makeAssotiations.js"
+
 await sequelize.authenticate().then(function() {
     console.log("Sequelize connected to database")
 }).catch(function(err) {
@@ -25,13 +27,15 @@ await sequelize.sync({alter: true}).then(function() {
 
 //========================================OTHER
 import morgan from "morgan"
+
 app.disable("x-powered-by")        //disable express tag
 app.use(express.json())                   //enable using json
 app.use(morgan(LOG_LEVEL))                //enable logging
 
 //========================================START SERVER
 app.listen(SERVER_PORT, function(err) {
-    if (err)
+    if (err) {
         throw err
+    }
     console.log("Server at http://" + SERVER_HOST + ":" + SERVER_PORT)
 })

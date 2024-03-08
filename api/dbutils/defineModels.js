@@ -1,3 +1,6 @@
 import {sequelize} from "./connectDB.js"
+import {undefUserModel} from "../models/user.model.js"
+import {undefCalendarModel} from "../models/calendar.model.js"
 
-//todo there will be models which will be defined and exported to other files
+export const userModel = await sequelize.define("users", undefUserModel)
+export const calendarModel = await sequelize.define("calendars", undefCalendarModel)
