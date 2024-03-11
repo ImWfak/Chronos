@@ -5,7 +5,7 @@ export const undefCalendarModel = {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     userId: {
         type: DataTypes.INTEGER,

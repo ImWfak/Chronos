@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="WS-232.10203.14">
-    <data-source name="ChronosDB" uuid="9f995fb5-663c-4cc6-8ae2-ff905db8ac33">
-      <database-info product="PostgreSQL" version="16.0" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.6.0" dbms="POSTGRES" exact-version="16.0" exact-driver-version="42.6">
+  <component name="dataSourceStorageLocal" created-in="WS-233.14475.40">
+    <data-source name="Chronos" uuid="3b0f858c-27a7-4d12-81a6-9f78fac210b3">
+      <database-info product="PostgreSQL" version="16.2" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.6.0" dbms="POSTGRES" exact-version="16.2" exact-driver-version="42.6">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />

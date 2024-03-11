@@ -8,7 +8,17 @@ import express from "express"
 
 const app = express()
 
+//========================================OTHER
+import morgan from "morgan"
+
+app.use(express.json())                   //enable using json
+app.disable("x-powered-by")        //disable express tag
+app.use(morgan(LOG_LEVEL))                //enable logging
+
 //========================================ROUTERS
+import userRouter from "../api/routers/user.router.js"
+
+app.use("/user", userRouter)
 //todo there will be routers to controllers
 
 //========================================DATA_BASE
@@ -24,13 +34,6 @@ await makeAssociations()
 await sequelize.sync({alter: true}).then(function() {
     console.log("Database has been updated")
 })
-
-//========================================OTHER
-import morgan from "morgan"
-
-app.disable("x-powered-by")        //disable express tag
-app.use(express.json())                   //enable using json
-app.use(morgan(LOG_LEVEL))                //enable logging
 
 //========================================START SERVER
 app.listen(SERVER_PORT, function(err) {

@@ -10,7 +10,7 @@ export const undefUserModel = {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     email: {
         type: DataTypes.STRING,
@@ -63,11 +63,11 @@ export const undefUserModel = {
         type: DataTypes.STRING,
         notNull: true,
         defaultValue: function() {
-            return "./PFPs/default.png"
+            return "./PFPs/image.jpg"
         },
         validate: {
             customValidator(inputPFP_Url) {
-                if (userPFP_UrlRegex.test(inputPFP_Url)) {
+                if (!userPFP_UrlRegex.test(inputPFP_Url)) {
                     throw new Error(
                         "Wrong PFP url value"
                         + "\n Check regex: " + userPFP_UrlRegex
@@ -86,19 +86,17 @@ export const undefUserModel = {
         notNull: true
     },
     lastname: {
-        type: DataTypes.STRING,
-        notNull: true
+        type: DataTypes.STRING
     },
     verified: {
         type: DataTypes.BOOLEAN,
-        notNull: true,
         defaultValue: function() {
             return false
         }
     },
     creationDate: {
         type: DataTypes.BIGINT,
-        defaultValue: function () {
+        defaultValue: function() {
             return Date.now()
         }
     },
