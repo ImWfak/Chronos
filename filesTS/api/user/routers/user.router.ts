@@ -10,7 +10,7 @@ import {
     InviteToCalendarsAccessibilityEnum,
     InviteToEventsAccessibilityEnum
 } from "../enums/user.enums"
-import UserController from "../controller/user.controller"
+import UserController from "../controllers/user.controller"
 
 const UserRouter: Router = express.Router()
 

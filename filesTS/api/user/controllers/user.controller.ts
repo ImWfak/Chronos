@@ -5,7 +5,7 @@ import {
 import {validationResult} from "express-validator"
 import UserInputDTO from "../DTOs/user.inputDTO"
 import UserOutputDTO from "../DTOs/user.outputDTO"
-import UserCRUD_Service from "../service/user.CRUD_Service"
+import UserCRUD_Service from "../services/user.CRUD_Service"
 
 class UserController {
     public static async create(request: Request, response: Response) {

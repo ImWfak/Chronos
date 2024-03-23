@@ -1,6 +1,6 @@
 import UserInputDTO from "../DTOs/user.inputDTO"
 import UserOutputDTO from "../DTOs/user.outputDTO"
-import UserModel from "../model/user.model"
+import UserModel from "../models/user.model"
 import * as bcrypt from "bcrypt"
 import {Op} from "sequelize"
 
@@ -89,8 +89,7 @@ class UserCRUD_Service {
             if (!foundedUserModel) {
                 return new Error("API_ERROR_CODE_001")
             }
-            if (
-                userInputDTO.email !== null &&
+            if (userInputDTO.email !== null &&
                 userInputDTO.email !== undefined &&
                 await UserModel.findOne({
                     where: {
@@ -101,8 +100,7 @@ class UserCRUD_Service {
             ) {
                 return new Error("API_ERROR_CODE_004")
             }
-            if (
-                userInputDTO.phone !== null &&
+            if (userInputDTO.phone !== null &&
                 userInputDTO.phone !== undefined &&
                 await UserModel.findOne({
                     where: {

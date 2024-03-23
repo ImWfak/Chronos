@@ -3,7 +3,7 @@ import {
     InviteToCalendarsAccessibilityEnum,
     InviteToEventsAccessibilityEnum
 } from "../enums/user.enums"
-import UserModel from "../model/user.model"
+import UserModel from "../models/user.model"
 
 class UserOutputDTO {
     declare id: number
