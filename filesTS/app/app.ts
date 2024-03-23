@@ -21,7 +21,7 @@ app.use(express.json())                   //enable using json
 app.use(morgan("combined"))        //enable logging
 
 //========================================CONNECT_ROUTERS
-import UserRouter from "../api/user/router/user.router"
+import UserRouter from "../api/user/routers/user.router"
 
 app.use("/user", UserRouter)
 
