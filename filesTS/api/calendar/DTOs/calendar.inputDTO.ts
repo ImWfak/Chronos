@@ -4,7 +4,7 @@ class CalendarInputDTO {
     declare user_id: number
     declare name: string
     declare description: string | null
-    declare type: CalendarTypeEnum
+    declare type: CalendarTypeEnum | null
 
     constructor(input: ReadableStream<Uint8Array>) {
         Object.assign(this, input)

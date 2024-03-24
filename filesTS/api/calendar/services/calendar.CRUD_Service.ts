@@ -8,10 +8,10 @@ class CalendarCRUD_Service {
     public static async create(calendarInputDTO: CalendarInputDTO): Promise<CalendarOutputDTO | Error> {
         try {
             if (!await UserModel.findByPk(calendarInputDTO.user_id)) {
-                return new Error("API_ERROR_CODE_001")
+                return new Error("USER_ERROR_CODE_01")
             }
             if (
-                calendarInputDTO.type == CalendarTypeEnum.MAIN &&
+                calendarInputDTO.type === CalendarTypeEnum.MAIN &&
                 await CalendarModel.findOne({
                     where: {
                         user_id: calendarInputDTO.user_id,
@@ -19,7 +19,7 @@ class CalendarCRUD_Service {
                     }
                 })
             ) {
-                return new Error()
+                return new Error("CALENDAR_ERROR_CODE_01")
             }
             const savedCalendarModel: CalendarModel = await CalendarModel.create(calendarInputDTO as any)
             return new CalendarOutputDTO(savedCalendarModel)
@@ -33,7 +33,7 @@ class CalendarCRUD_Service {
         try {
             const foundedCalendarModel: CalendarModel | null = await CalendarModel.findByPk(id)
             if (!foundedCalendarModel) {
-                return new Error()
+                return new Error("CALENDAR_ERROR_CODE_02")
             }
             return new CalendarOutputDTO(foundedCalendarModel)
         }
@@ -42,7 +42,7 @@ class CalendarCRUD_Service {
         }
     }
 
-    public static async findAllUserCalendars(user_id: number) : Promise<CalendarOutputDTO[] | Error> {
+    public static async findAllUserCalendarsByUserId(user_id: number) : Promise<CalendarOutputDTO[] | Error> {
         try {
             const allFoundedUserCalendarsModels: CalendarModel[] = await CalendarModel.findAll({where: {user_id: user_id}})
             const allUserCalendarsOutputDTOs: CalendarOutputDTO[] = []
@@ -52,7 +52,7 @@ class CalendarCRUD_Service {
                 }
             )
             if (allUserCalendarsOutputDTOs.length === 0) {
-                return new Error()
+                return new Error("CALENDAR_ERROR_CODE_03")
             }
             return allUserCalendarsOutputDTOs
         }
@@ -71,7 +71,7 @@ class CalendarCRUD_Service {
                 }
             )
             if (allCalendarsOutputDTOs.length === 0) {
-                return new Error()
+                return new Error("CALENDAR_ERROR_CODE_04")
             }
             return allCalendarsOutputDTOs
         }
@@ -87,9 +87,12 @@ class CalendarCRUD_Service {
         try {
             const foundedCalendarModel: CalendarModel | null = await CalendarModel.findByPk(id)
             if (!foundedCalendarModel) {
-                return new Error()
+                return new Error("CALENDAR_ERROR_CODE_02")
             }
-            if (calendarInputDTO.type == CalendarTypeEnum.MAIN &&
+            if (!await UserModel.findByPk(calendarInputDTO.user_id)) {
+                return new Error("USER_ERROR_CODE_01")
+            }
+            if (calendarInputDTO.type === CalendarTypeEnum.MAIN &&
                 await CalendarModel.findOne({
                     where: {
                         user_id: calendarInputDTO.user_id,
@@ -97,7 +100,7 @@ class CalendarCRUD_Service {
                     }
                 })
             ) {
-                return new Error()
+                return new Error("CALENDAR_ERROR_CODE_01")
             }
             const updatedCalendarModel: CalendarModel = await foundedCalendarModel.update(calendarInputDTO as any)
             return new CalendarOutputDTO(updatedCalendarModel)
@@ -111,7 +114,10 @@ class CalendarCRUD_Service {
         try {
             const foundedCalendarModel: CalendarModel | null = await CalendarModel.findByPk(id)
             if (!foundedCalendarModel) {
-                return new Error()
+                return new Error("CALENDAR_ERROR_CODE_02")
+            }
+            if (foundedCalendarModel.type === CalendarTypeEnum.MAIN) {
+                return new Error("CALENDAR_ERROR_CODE_05")
             }
             await foundedCalendarModel.destroy()
             return new CalendarOutputDTO(foundedCalendarModel)

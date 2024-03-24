@@ -1,7 +1,14 @@
-### ERROR CODES MEANINGS
-- **API_ERROR_CODE_001** - *User with inputted id does not exist*
-- **API_ERROR_CODE_002** - *User with inputted email does not exist*
-- **API_ERROR_CODE_003** - *User with inputted phone does not exist*
-- **API_ERROR_CODE_004** - *User with inputted email already exist*
-- **API_ERROR_CODE_005** - *User with inputted phone already exist*
-- **API_ERROR_CODE_006** - *Any user exist in database*
+- ## ERROR CODES MEANINGS
+  - ### USER ERRORS
+    - **USER_ERROR_CODE_01** - User with inputted id does not exist
+    - **USER_ERROR_CODE_02** - User with inputted email does not exist
+    - **USER_ERROR_CODE_03** - User with inputted phone does not exist
+    - **USER_ERROR_CODE_04** - User with inputted email already exist
+    - **USER_ERROR_CODE_05** - User with inputted phone already exist
+    - **USER_ERROR_CODE_06** - Any user exists in database
+  - ### CALENDAR ERRORS
+    - **CALENDAR_ERROR_CODE_01** - User already have main calendar, can be only one
+    - **CALENDAR_ERROR_CODE_02** - Calendar with inputted id does not exist
+    - **CALENDAR_ERROR_CODE_03** - User does not have own calendars
+    - **CALENDAR_ERROR_CODE_04** - Any calendar exists in database
+    - **CALENDAR_ERROR_CODE_05** - User can not delete own main calendar

@@ -18,12 +18,12 @@ class UserController {
         const userInputDTO: UserInputDTO = new UserInputDTO(request.body as ReadableStream<Uint8Array>)
         const result: UserOutputDTO | Error = await UserCRUD_Service.create(userInputDTO)
         if (result instanceof Error) {
-            if (result.message.includes("API_ERROR_CODE_004")) {
+            if (result.message.includes("USER_ERROR_CODE_04")) {
                 return response.status(400).json({
                     message: "User with this email already exist, inputted email: " + userInputDTO.email
                 })
             }
-            if (result.message.includes("API_ERROR_CODE_005")) {
+            if (result.message.includes("USER_ERROR_CODE_05")) {
                 return response.status(400).json({
                     message: "User with this phone already exist, inputted phone: " + userInputDTO.phone
                 })
@@ -53,7 +53,7 @@ class UserController {
         const id: number = Number(request.params.id)
         const result: UserOutputDTO | Error = await UserCRUD_Service.findById(id)
         if (result instanceof Error) {
-            if (result.message.includes("API_ERROR_CODE_001")) {
+            if (result.message.includes("USER_ERROR_CODE_01")) {
                 return response.status(400).json({
                     message: "User with this id does not exist, inputted id: " + id
                 })
@@ -83,7 +83,7 @@ class UserController {
         const email: string = request.params.email
         const result: UserOutputDTO | Error = await UserCRUD_Service.findByEmail(email)
         if (result instanceof Error) {
-            if (result.message.includes("API_ERROR_CODE_002")) {
+            if (result.message.includes("USER_ERROR_CODE_02")) {
                 return response.status(400).json({
                     message: "User with this email does not exist, inputted email: " + email
                 })
@@ -113,7 +113,7 @@ class UserController {
         const phone: string = request.params.phone
         const result: UserOutputDTO | Error = await UserCRUD_Service.findByPhone(phone)
         if (result instanceof Error) {
-            if (result.message.includes("API_ERROR_CODE_003")) {
+            if (result.message.includes("USER_ERROR_CODE_03")) {
                 return response.status(400).json({
                     message: "User with this phone does not exist, inputted phone: " + phone
                 })
@@ -127,7 +127,7 @@ class UserController {
         }
         else {
             return response.status(200).json({
-                message: "User has been found by phone",
+                message: "User has been founded by phone",
                 foundedUser: result
             })
         }
@@ -142,9 +142,9 @@ class UserController {
         }
         const result: UserOutputDTO[] | Error = await UserCRUD_Service.findAll()
         if (result instanceof Error) {
-            if (result.message.includes("API_ERROR_CODE_006")) {
+            if (result.message.includes("USER_ERROR_CODE_06")) {
                 return response.status(400).json({
-                    message: "Any user exist in database"
+                    message: "Any user exists in database"
                 })
             }
             else {
@@ -173,17 +173,17 @@ class UserController {
         const userInputDTO: UserInputDTO = new UserInputDTO(request.body as ReadableStream<Uint8Array>)
         const result: UserOutputDTO | Error = await UserCRUD_Service.updateById(id, userInputDTO)
         if (result instanceof Error) {
-            if (result.message.includes("API_ERROR_CODE_001")) {
+            if (result.message.includes("USER_ERROR_CODE_01")) {
                 return response.status(400).json({
                     message: "User with this id does not exist, inputted id: " + id
                 })
             }
-            if (result.message.includes("API_ERROR_CODE_004")) {
+            if (result.message.includes("USER_ERROR_CODE_04")) {
                 return response.status(400).json({
                     message: "User with this email already exist, inputted email: " + userInputDTO.email
                 })
             }
-            if (result.message.includes("API_ERROR_CODE_005")) {
+            if (result.message.includes("USER_ERROR_CODE_05")) {
                 return response.status(400).json({
                     message: "User with this phone already exist, inputted phone: " + userInputDTO.phone
                 })
@@ -213,7 +213,7 @@ class UserController {
         const id: number = Number(request.params.id)
         const result: UserOutputDTO | Error = await UserCRUD_Service.deleteById(id)
         if (result instanceof Error) {
-            if (result.message.includes("API_ERROR_CODE_001")) {
+            if (result.message.includes("USER_ERROR_CODE_01")) {
                 return response.status(400).json({
                     message: "User with this id does not exist, inputted id: " + id
                 })
@@ -228,7 +228,7 @@ class UserController {
         else {
             return response.status(200).json({
                 message: "User has been deleted by id",
-                updatedUser: result
+                deletedUser: result
             })
         }
     }

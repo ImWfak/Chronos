@@ -1,6 +1,7 @@
 //========================================CONNECT_TO_DATABASE
 import {sequelize} from "../databaseUtils/connectToDB"
 import {createTables} from "../databaseUtils/createTables"
+import {createAssociations} from "../databaseUtils/makeAssociations"
 
 sequelize.authenticate().then(function() {
     console.log("Sequelize connected to database")
@@ -9,6 +10,9 @@ sequelize.authenticate().then(function() {
 })
 createTables().then(function() {
     console.log("Database has been updated")
+})
+createAssociations().then(function() {
+    console.log("Associations have been created")
 })
 
 //========================================CONFIG_SERVER
@@ -22,8 +26,10 @@ app.use(morgan("combined"))        //enable logging
 
 //========================================CONNECT_ROUTERS
 import UserRouter from "../api/user/routers/user.router"
+import CalendarRouter from "../api/calendar/routers/calendar.router"
 
 app.use("/user", UserRouter)
+app.use("/calendar", CalendarRouter)
 
 //========================================START_SERVER
 import {

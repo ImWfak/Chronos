@@ -8,10 +8,10 @@ class UserCRUD_Service {
     public static async create(userInputDTO: UserInputDTO): Promise<UserOutputDTO | Error> {
         try {
             if (await UserModel.findOne({where: {email: userInputDTO.email}})) {
-                return new Error("API_ERROR_CODE_004")
+                return new Error("USER_ERROR_CODE_04")
             }
             if (await UserModel.findOne({where: {phone: userInputDTO.phone}})) {
-                return new Error("API_ERROR_CODE_005")
+                return new Error("USER_ERROR_CODE_05")
             }
             userInputDTO.password = await bcrypt.hash(userInputDTO.password, await bcrypt.genSalt(10))
             const savedUserModel: UserModel = await UserModel.create(userInputDTO as any)
@@ -26,7 +26,7 @@ class UserCRUD_Service {
         try {
             const foundedUserModel: UserModel | null = await UserModel.findByPk(id)
             if (!foundedUserModel) {
-                return new Error("API_ERROR_CODE_001")
+                return new Error("USER_ERROR_CODE_01")
             }
             return new UserOutputDTO(foundedUserModel)
         }
@@ -39,7 +39,7 @@ class UserCRUD_Service {
         try {
             const foundedUserModel: UserModel | null = await UserModel.findOne({where: {email: email}})
             if (!foundedUserModel) {
-                return new Error("API_ERROR_CODE_002")
+                return new Error("USER_ERROR_CODE_02")
             }
             return new UserOutputDTO(foundedUserModel)
         }
@@ -52,7 +52,7 @@ class UserCRUD_Service {
         try {
             const foundedUserModel: UserModel | null = await UserModel.findOne({where: {phone: phone}})
             if (!foundedUserModel) {
-                return new Error("API_ERROR_CODE_003")
+                return new Error("USER_ERROR_CODE_03")
             }
             return new UserOutputDTO(foundedUserModel)
         }
@@ -71,7 +71,7 @@ class UserCRUD_Service {
                 }
             )
             if (allUsersOutputDTOs.length === 0) {
-                return new Error("API_ERROR_CODE_006")
+                return new Error("USER_ERROR_CODE_06")
             }
             return allUsersOutputDTOs
         }
@@ -87,7 +87,7 @@ class UserCRUD_Service {
         try {
             const foundedUserModel: UserModel | null = await UserModel.findByPk(id)
             if (!foundedUserModel) {
-                return new Error("API_ERROR_CODE_001")
+                return new Error("USER_ERROR_CODE_01")
             }
             if (userInputDTO.email !== null &&
                 userInputDTO.email !== undefined &&
@@ -98,7 +98,7 @@ class UserCRUD_Service {
                     }
                 })
             ) {
-                return new Error("API_ERROR_CODE_004")
+                return new Error("USER_ERROR_CODE_04")
             }
             if (userInputDTO.phone !== null &&
                 userInputDTO.phone !== undefined &&
@@ -109,7 +109,7 @@ class UserCRUD_Service {
                     }
                 })
             ) {
-                return new Error("API_ERROR_CODE_005")
+                return new Error("USER_ERROR_CODE_05")
             }
             userInputDTO.password = await bcrypt.hash(userInputDTO.password, await bcrypt.genSalt(10))
             const updatedUserModel: UserModel = await foundedUserModel.update(userInputDTO as any)
@@ -124,7 +124,7 @@ class UserCRUD_Service {
         try {
             const foundedUserModel: UserModel | null = await UserModel.findByPk(id)
             if (!foundedUserModel) {
-                return new Error("API_ERROR_CODE_001")
+                return new Error("USER_ERROR_CODE_01")
             }
             await foundedUserModel.destroy()
             return new UserOutputDTO(foundedUserModel)
