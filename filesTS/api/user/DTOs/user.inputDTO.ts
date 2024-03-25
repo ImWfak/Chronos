@@ -13,9 +13,9 @@ class UserInputDTO {
     declare surname: string
     declare lastname: string | null
     declare verified: boolean
-    declare remindsAccessibility: UserRemindsAccessibilityEnum
-    declare eventsAccessibility: InviteToEventsAccessibilityEnum
-    declare calendarsAccessibility: InviteToCalendarsAccessibilityEnum
+    declare remindsAccessibility: UserRemindsAccessibilityEnum | null
+    declare eventsAccessibility: InviteToEventsAccessibilityEnum | null
+    declare calendarsAccessibility: InviteToCalendarsAccessibilityEnum | null
 
     constructor(input: ReadableStream<Uint8Array>) {
         Object.assign(this, input)
