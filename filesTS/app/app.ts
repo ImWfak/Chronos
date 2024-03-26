@@ -20,9 +20,9 @@ import * as express from "express"
 import * as morgan from "morgan"
 
 const app: express.Application = express()
-app.disable("x-powered-by")        //disable express tag
-app.use(express.json())                   //enable using json
-app.use(morgan("combined"))        //enable logging
+app.disable("x-powered-by")
+app.use(express.json())
+app.use(morgan("combined"))
 
 //========================================CONNECT_ROUTERS
 import UserRouter from "../api/user/routers/user.router"
