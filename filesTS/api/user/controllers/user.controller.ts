@@ -134,12 +134,6 @@ class UserController {
     }
 
     public static async findAll(request: Request, response: Response) {
-        const error = validationResult(request)
-        if (!error.isEmpty()) {
-            return response.status(400).json({
-                errors: error.array()
-            })
-        }
         const result: UserOutputDTO[] | Error = await UserCRUD_Service.findAll()
         if (result instanceof Error) {
             if (result.message.includes("USER_ERROR_CODE_06")) {

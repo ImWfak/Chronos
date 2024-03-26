@@ -3,6 +3,7 @@ import CalendarOutputDTO from "../DTOs/calendar.outputDTO"
 import UserModel from "../../user/models/user.model"
 import CalendarModel from "../models/calendar.model"
 import {CalendarTypeEnum} from "../enums/calendar.enum"
+import {Op} from "sequelize"
 
 class CalendarCRUD_Service {
     public static async create(calendarInputDTO: CalendarInputDTO): Promise<CalendarOutputDTO | Error> {
@@ -42,10 +43,10 @@ class CalendarCRUD_Service {
         }
     }
 
-    public static async findAllUserCalendarsByUserId(user_id: number) : Promise<CalendarOutputDTO[] | Error> {
+    public static async findAllCalendarsByUserId(user_id: number) : Promise<CalendarOutputDTO[] | Error> {
         try {
             const allFoundedUserCalendarsModels: CalendarModel[] = await CalendarModel.findAll({where: {user_id: user_id}})
-            const allUserCalendarsOutputDTOs: CalendarOutputDTO[] = []
+            const allUserCalendarsOutputDTOs: CalendarOutputDTO[] = Array()
             allFoundedUserCalendarsModels.forEach(
                 function(foundedCalendarModel: CalendarModel) {
                     allUserCalendarsOutputDTOs.push(new CalendarOutputDTO(foundedCalendarModel))
@@ -64,7 +65,7 @@ class CalendarCRUD_Service {
     public static async findAll(): Promise<CalendarOutputDTO[] | Error> {
         try {
             const allFoundedCalendarsModels: CalendarModel[] = await CalendarModel.findAll()
-            const allCalendarsOutputDTOs: CalendarOutputDTO[] = []
+            const allCalendarsOutputDTOs: CalendarOutputDTO[] = Array()
             allFoundedCalendarsModels.forEach(
                 function(foundedCalendarModel: CalendarModel) {
                     allCalendarsOutputDTOs.push(new CalendarOutputDTO(foundedCalendarModel))
@@ -95,12 +96,19 @@ class CalendarCRUD_Service {
             if (calendarInputDTO.type === CalendarTypeEnum.MAIN &&
                 await CalendarModel.findOne({
                     where: {
+                        id: {[Op.ne]: id},
                         user_id: calendarInputDTO.user_id,
                         type: CalendarTypeEnum.MAIN
                     }
                 })
             ) {
                 return new Error("CALENDAR_ERROR_CODE_01")
+            }
+            if (calendarInputDTO.type === CalendarTypeEnum.ADDITIONAL &&
+                calendarInputDTO.user_id === foundedCalendarModel.user_id &&
+                foundedCalendarModel.type === CalendarTypeEnum.MAIN
+            ) {
+                return new Error("CALENDAR_ERROR_CODE_05")
             }
             const updatedCalendarModel: CalendarModel = await foundedCalendarModel.update(calendarInputDTO as any)
             return new CalendarOutputDTO(updatedCalendarModel)
@@ -117,7 +125,7 @@ class CalendarCRUD_Service {
                 return new Error("CALENDAR_ERROR_CODE_02")
             }
             if (foundedCalendarModel.type === CalendarTypeEnum.MAIN) {
-                return new Error("CALENDAR_ERROR_CODE_05")
+                return new Error("CALENDAR_ERROR_CODE_06")
             }
             await foundedCalendarModel.destroy()
             return new CalendarOutputDTO(foundedCalendarModel)

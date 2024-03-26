@@ -11,4 +11,11 @@
     - **CALENDAR_ERROR_CODE_02** - Calendar with inputted id does not exist
     - **CALENDAR_ERROR_CODE_03** - User does not have own calendars
     - **CALENDAR_ERROR_CODE_04** - Any calendar exists in database
-    - **CALENDAR_ERROR_CODE_05** - User can not delete own main calendar
+    - **CALENDAR_ERROR_CODE_05** - Calendar can not be cast from main to additional
+    - **CALENDAR_ERROR_CODE_06** - Main calendar can not be deleted
+  - ### USER REF CALENDAR ERRORS
+    - **URC_ERROR_CODE_01** - User calendar reference already exist
+    - **URC_ERROR_CODE_02** - User calendar reference with inputted id does not exist
+    - **URC_ERROR_CODE_03** - Any user calendar references to exist with inputted user id
+    - **URC_ERROR_CODE_04** - Any user calendar references to exist with inputted calendar id
+    - **URC_ERROR_CODE_05** - Any user calendar reference exist in database

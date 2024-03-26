@@ -1,16 +1,3 @@
-export enum InviteToCalendarsAccessibilityEnum {
-    ALL_INVITES = "ALL_INVITES",
-    FOLLOWED_USERS_INVITES = "FOLLOWED_USERS_INVITES",
-    NO_INVITES = "NO_INVITES"
-}
-
-export enum InviteToEventsAccessibilityEnum {
-    ALL_INVITES = "ALL_INVITES",
-    FOLLOWED_USERS_INVITES = "FOLLOWED_USERS_INVITES",
-    FOLLOWED_CALENDARS_INVITES = "FOLLOWED_CALENDARS_INVITES",
-    NO_INVITES = "NO_INVITES"
-}
-
 export enum UserRemindsAccessibilityEnum {
     EASY_HIGHER = "EASY_HIGHER",
     MIDDLE_HIGHER = "MIDDLE_HIGHER",
@@ -23,4 +10,15 @@ export enum UserRemindsAccessibilityEnum {
     EASY_LOWER = "EASY_LOWER",
     MIDDLE_LOWER = "MIDDLE_LOWER",
     HARD_LOWER = "HARD_LOWER",
+}
+export enum InviteToEventsAccessibilityEnum {
+    ALL_INVITES = "ALL_INVITES",
+    FOLLOWED_USERS_INVITES = "FOLLOWED_USERS_INVITES",
+    FOLLOWED_CALENDARS_INVITES = "FOLLOWED_CALENDARS_INVITES",
+    NO_INVITES = "NO_INVITES"
+}
+export enum InviteToCalendarsAccessibilityEnum {
+    ALL_INVITES = "ALL_INVITES",
+    FOLLOWED_USERS_INVITES = "FOLLOWED_USERS_INVITES",
+    NO_INVITES = "NO_INVITES"
 }

@@ -64,7 +64,7 @@ class UserCRUD_Service {
     public static async findAll(): Promise<UserOutputDTO[] | Error> {
         try {
             const allFoundedUserModels: UserModel[] = await UserModel.findAll()
-            const allUsersOutputDTOs: UserOutputDTO[] = []
+            const allUsersOutputDTOs: UserOutputDTO[] = Array()
             allFoundedUserModels.forEach(
                 function (foundedUserModel: UserModel) {
                     allUsersOutputDTOs.push(new UserOutputDTO(foundedUserModel))
