@@ -1,30 +1,30 @@
 import {
-    Model,
     CreationOptional,
-    DataTypes
+    DataTypes,
+    Model
 } from "sequelize"
-import {URC_RoleEnum} from "../enums/userRefCalendar.enums"
+import {RemindImportanceEnum} from "../enums/userRefEvent.enums"
 import {sequelize} from "../../../databaseUtils/connectToDB"
 
-interface URC_ModelFields {
+interface URE_ModelFields {
     id: CreationOptional<number>
     user_id: number
-    calendar_id: number
-    role: CreationOptional<URC_RoleEnum>
+    event_id: number
+    remindImportance: CreationOptional<RemindImportanceEnum>
     creationDate: CreationOptional<number>
     updateDate: CreationOptional<number | null>
 }
 
-class URC_Model extends Model<URC_ModelFields> implements URC_ModelFields {
+class URE_Model extends Model<URE_ModelFields> implements URE_ModelFields {
     declare id: CreationOptional<number>
     declare user_id: number
-    declare calendar_id: number
-    declare role: CreationOptional<URC_RoleEnum>
+    declare event_id: number
+    declare remindImportance: CreationOptional<RemindImportanceEnum>
     declare creationDate: CreationOptional<number>
     declare updateDate: CreationOptional<number | null>
 }
 
-URC_Model.init(
+URE_Model.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -33,21 +33,21 @@ URC_Model.init(
         },
         user_id: {
             type: DataTypes.INTEGER,
-            allowNull: true,
+            allowNull: false,
             unique: false
         },
-        calendar_id: {
+        event_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             unique: false
         },
-        role: {
+        remindImportance: {
             type: DataTypes.ENUM(
-                ...Object.values(URC_RoleEnum).map(value => value.toString())
+                ...Object.values(RemindImportanceEnum).map(value => value.toString())
             ),
             allowNull: false,
             unique: false,
-            defaultValue: URC_RoleEnum.GUEST
+            defaultValue: RemindImportanceEnum.MIDDLE
         },
         creationDate: {
             type: DataTypes.BIGINT,
@@ -61,8 +61,8 @@ URC_Model.init(
             unique: false,
             defaultValue: null,
             validate: {
-                function(inputtedUpdateDate: number) {
-                    if (inputtedUpdateDate && this.creationDate && inputtedUpdateDate < this.creationDate) {
+                function(inputtedUpdateDate: number, ure_Model: URE_Model) {
+                    if (inputtedUpdateDate < ure_Model.creationDate) {
                         throw new Error("UpdateDate validation error, creationDate can not be bigger than updateDate, inputted updateDate: " + inputtedUpdateDate)
                     }
                 }
@@ -71,8 +71,8 @@ URC_Model.init(
     },
     {
         sequelize,
-        tableName: "usersRefCalendars"
+        tableName: "usersRefEvents"
     }
 )
 
-export default URC_Model
+export default URE_Model

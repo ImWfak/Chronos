@@ -6,24 +6,24 @@ import URC_Model from "../models/userRefCalendar.model"
 import {Op} from "sequelize"
 
 class URC_CRUD_Service {
-    public static async create(URC_InputDTO: URC_InputDTO): Promise<URC_OutputDTO | Error> {
+    public static async create(urc_InputDTO: URC_InputDTO): Promise<URC_OutputDTO | Error> {
         try {
-            if (!await UserModel.findByPk(URC_InputDTO.user_id)) {
+            if (!await UserModel.findByPk(urc_InputDTO.user_id)) {
                 return new Error("USER_ERROR_CODE_01")
             }
-            if (!await CalendarModel.findByPk(URC_InputDTO.calendar_id)) {
+            if (!await CalendarModel.findByPk(urc_InputDTO.calendar_id)) {
                 return new Error("CALENDAR_ERROR_CODE_02")
             }
             if (await URC_Model.findOne({
                     where: {
-                        user_id: URC_InputDTO.user_id,
-                        calendar_id: URC_InputDTO.calendar_id
+                        user_id: urc_InputDTO.user_id,
+                        calendar_id: urc_InputDTO.calendar_id
                     }
                 })
             ) {
                 return new Error("URC_ERROR_CODE_01")
             }
-            const savedURC_Model: URC_Model = await URC_Model.create(URC_InputDTO as any)
+            const savedURC_Model: URC_Model = await URC_Model.create(urc_InputDTO as any)
             return new URC_OutputDTO(savedURC_Model)
         }
         catch (error) {
@@ -103,30 +103,30 @@ class URC_CRUD_Service {
 
     public static async updateById(
         id: number,
-        URC_InputDTO: URC_InputDTO
+        urc_InputDTO: URC_InputDTO
     ): Promise<URC_OutputDTO | Error> {
         try {
             const foundedURC_Model: URC_Model | null =  await URC_Model.findByPk(id)
             if (!foundedURC_Model) {
                 return new Error("URC_ERROR_CODE_02")
             }
-            if (!await UserModel.findByPk(URC_InputDTO.user_id)) {
+            if (!await UserModel.findByPk(urc_InputDTO.user_id)) {
                 return new Error("USER_ERROR_CODE_01")
             }
-            if (!await CalendarModel.findByPk(URC_InputDTO.calendar_id)) {
+            if (!await CalendarModel.findByPk(urc_InputDTO.calendar_id)) {
                 return new Error("CALENDAR_ERROR_CODE_02")
             }
             if (await URC_Model.findOne({
                     where: {
                         id: {[Op.ne]: id},
-                        user_id: URC_InputDTO.user_id,
-                        calendar_id: URC_InputDTO.calendar_id
+                        user_id: urc_InputDTO.user_id,
+                        calendar_id: urc_InputDTO.calendar_id
                     }
                 })
             ) {
                 return new Error("URC_ERROR_CODE_01")
             }
-            const updatedURC_Model: URC_Model = await foundedURC_Model.update(URC_InputDTO as any)
+            const updatedURC_Model: URC_Model = await foundedURC_Model.update(urc_InputDTO as any)
             return new URC_OutputDTO(updatedURC_Model)
         }
         catch (error) {

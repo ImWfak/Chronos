@@ -18,4 +18,16 @@
     - **URC_ERROR_CODE_02** - User calendar reference with inputted id does not exist
     - **URC_ERROR_CODE_03** - Any user calendar references to exist with inputted user id
     - **URC_ERROR_CODE_04** - Any user calendar references to exist with inputted calendar id
-    - **URC_ERROR_CODE_05** - Any user calendar reference exist in database
+    - **URC_ERROR_CODE_05** - Any user calendar references to exist in database
+  - ### EVENTS ERRORS
+    - **EVENT_ERROR_CODE_01** - Event end date can not be less than event begin date
+    - **EVENT_ERROR_CODE_02** - Event with inputted id does not exist
+    - **EVENT_ERROR_CODE_03** - Any event exist with inputted user id
+    - **EVENT_ERROR_CODE_04** - Any event exist with inputted calendar id
+    - **EVENT_ERROR_CODE_05** - Any event exist in database
+  - ### USER REF EVENTS ERRORS
+    - **URE_ERROR_CODE_01** - User event reference already exist
+    - **URE_ERROR_CODE_02** - User event reference with inputted id does not exist
+    - **URE_ERROR_CODE_03** - Any user event references to exist with inputted user id
+    - **URE_ERROR_CODE_04** - Any user event references to exist with inputted event id
+    - **URC_ERROR_CODE_05** - Any user event reference to exist in database
